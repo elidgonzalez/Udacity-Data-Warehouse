@@ -1,15 +1,21 @@
+'''
+File to drop tables if they exist and create them. Useful for restarting if tables 
+weren't inserted correctly.
+'''
 import configparser
 import psycopg2
 from sql_queries import create_table_queries, drop_table_queries
 
 
 def drop_tables(cur, conn):
+    '''drop_tables function to drop all tables'''
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def create_tables(cur, conn):
+    '''create_tables function to create all tables needed for etl'''
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()
